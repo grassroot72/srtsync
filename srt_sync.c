@@ -8,10 +8,11 @@
 #include <time.h>
 
 
-int main(int ac, char *av[])
+int main(int ac, char* av[])
 {
-  FILE *fin, *fout;
-  char *linebuf = NULL;
+  FILE* fin;
+  FILE* fout;
+  char* linebuf = NULL;
   size_t linebuf_size = 0;
   int nread;
 
@@ -20,7 +21,7 @@ int main(int ac, char *av[])
   struct tm when = {0};
   time_t converted_time;
 
-  char *converted_time_str;
+  char* converted_time_str;
   char start_time_str[9];
   char start_mss_str[4];
   char end_time_str[9];
