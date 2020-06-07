@@ -42,7 +42,7 @@ int main(int ac, char* av[])
   /* help */
   if (ac < 5) {
     printf("The .srt file must have an empty line as the last line\n");
-    printf("Usage: srt_sync <secs_to_shift> <num_of_lines_shift> <in_file> <out_file>\n");
+    printf("Usage: srt_sync <secs_to_shift> <num_of_lines_to_shift> <in_file> <out_file>\n");
     return 0;
   }
 
