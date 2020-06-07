@@ -16,7 +16,11 @@ int main(int ac, char* av[])
   size_t linebuf_size = 0;
   int nread;
 
-  /* convert to time */
+  /* line number */
+  int line_num;
+  char line_num_str[6];
+
+  /* converts to time */
   int hh, mm, ss;
   struct tm when = {0};
   time_t converted_time;
@@ -33,27 +37,31 @@ int main(int ac, char* av[])
   char new_timeline_str[32];
 
   int shift_ss;
+  int shift_num_line;
 
   /* help */
-  if (ac < 4) {
+  if (ac < 5) {
     printf("The .srt file must have an empty line as the last line\n");
-    printf("Usage: srt_sync <secs> <in_file> <out_file>\n");
+    printf("Usage: srt_sync <secs_to_shift> <num_of_lines_shift> <in_file> <out_file>\n");
     return 0;
   }
 
 
   /* time shifts in seconds */
   shift_ss = atoi(av[1]);
+  /* the number of lines to shift */
+  shift_num_line = atoi(av[2]);
+
 
   /* open the input file */
-  fin = fopen(av[2], "r");
+  fin = fopen(av[3], "r");
   if (fin == NULL) {
     perror("fopen");
     exit(EXIT_FAILURE);
   }
 
   /* open the output file*/
-  fout = fopen(av[3], "w");
+  fout = fopen(av[4], "w");
   if (fout == NULL) {
     perror("fopen");
     exit(EXIT_FAILURE);
@@ -70,7 +78,10 @@ int main(int ac, char* av[])
     }
 
     /* the number line */
-    fputs(linebuf, fout);
+    line_num = atoi(linebuf);
+    line_num += shift_num_line;
+    sprintf(line_num_str, "%d\n", line_num);
+    fputs(line_num_str, fout);
 
     /* next read, the time line */
     nread = getline(&linebuf, &linebuf_size, fin);
@@ -141,7 +152,6 @@ int main(int ac, char* av[])
     /* commit the new timeline string to file */
     fputs(new_timeline_str, fout);
 
-
     /* next read(s), the content lines */
     do {
       nread = getline(&linebuf, &linebuf_size, fin);
@@ -154,8 +164,9 @@ int main(int ac, char* av[])
   } while (1);
 
 
-  if (linebuf)
+  if (linebuf) {
     free(linebuf);
+  }
 
   fclose(fin);
   fclose(fout);
