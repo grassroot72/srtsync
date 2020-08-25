@@ -1,9 +1,9 @@
-# srt_sync makefile
+# srtsync makefile
 
 CC = gcc
 CFLAGS = -O2 -Wall
-OBJS = srt_sync.o
-EXES = srt_sync
+OBJS = srtsync.o
+EXES = srtsync
 
 all: ${EXES}
 
