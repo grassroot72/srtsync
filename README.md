@@ -1,4 +1,4 @@
-# srt_sync
+# srtsync
 
 This is a very simple program in c aiming to help anyone who wants to sync the 
 subtitles with the sound track.
