@@ -10,7 +10,7 @@ to unix line ending format (use dos2unix to convert, or simply open it by any
 text editor which can do the conversion and save it).
 
 For efficiency and simplicity, I haven't added code to skip the UTF-8 BOM, so the
-srt file to work with this program shoud NOT have UTF-8 BOM.
+srt file to work with this program shoud NOT have a UTF-8 BOM.
 
 I put it in the public domain so everybody can use and modify it.
 
